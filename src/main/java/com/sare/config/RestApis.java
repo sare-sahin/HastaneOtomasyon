@@ -9,4 +9,6 @@ public class RestApis {
     public static final String KULLANICI = BASE_URL + "/kullanici";
     public static final String RANDEVU = BASE_URL + "/randevu";
 
+    public static final String REGISTER = "/register";
+
 }
