@@ -1,5 +1,6 @@
 package com.sare.controller;
 
+import com.sare.dto.request.LoginRequestDto;
 import com.sare.dto.request.RegisterRequestDto;
 import com.sare.dto.response.BaseResponse;
 import com.sare.service.KullaniciService;
@@ -24,6 +25,17 @@ public class KullaniciController {
                 .code(200)
                 .message("Yeni üye başarı ile kaydedildi.")
                 .data(true)
+                .build());
+    }
+
+
+    @PostMapping(LOGIN)
+    public ResponseEntity<BaseResponse<String>> login(@RequestBody LoginRequestDto dto){
+        String token = kullaniciService.kullaniciGirisi(dto);
+        return ResponseEntity.ok(BaseResponse.<String>builder()
+                .code(200)
+                .message("Kullanıcı girişi başarı ile yapıldı.")
+                .data(token)
                 .build());
     }
 }

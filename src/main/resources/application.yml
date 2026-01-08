@@ -1,3 +1,28 @@
 #Apache Tomcat'in portunu değiştirdik.
 server:
   port: 9090
+
+spring:
+  security:
+    user:
+      name: sare
+      password: 12345
+
+
+logging:
+  file:
+    name: hastaneotomasyon.log
+  logback:
+    rollingpolicy:
+      max-file-size: 2MB
+  level:
+    root: info
+
+
+benim-uygulamam:
+  urun-baslik: 'Yeni Java '
+  default-price: 5000
+
+
+my-jwt:
+  secret-key: "dfvfdgşşl43534646+&/+6534g"

@@ -10,5 +10,6 @@ public class RestApis {
     public static final String RANDEVU = BASE_URL + "/randevu";
 
     public static final String REGISTER = "/register";
+    public static final String LOGIN = "/login";
 
 }
