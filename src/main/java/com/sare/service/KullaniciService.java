@@ -24,10 +24,16 @@ public class KullaniciService {
         kullaniciRepository.save(kullanici);
     }
 
+
     public String kullaniciGirisi(LoginRequestDto dto) {
         Optional<Kullanici> kullanici = kullaniciRepository.findOptionalByEmailAndSifre(dto.email(),dto.sifre());
         if(kullanici.isEmpty()) throw new HastaneOtomasyonException(ErrorType.EMAILSIFREHATASI);
         return jwtManager.createToken(kullanici.get().getId());
+    }
+
+
+    public Optional<Kullanici> kullaniciBulIdyeGore(Long kullaniciId) {
+        return kullaniciRepository.findById(kullaniciId);
     }
 
 
