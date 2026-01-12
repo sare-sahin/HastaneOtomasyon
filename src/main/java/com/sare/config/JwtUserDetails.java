@@ -1,9 +1,12 @@
 package com.sare.config;
 
 import com.sare.entity.Kullanici;
+import com.sare.entity.Rol;
 import com.sare.service.KullaniciService;
+import com.sare.service.RolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtUserDetails implements UserDetailsService {
     private final KullaniciService kullaniciService;
+    private final RolService rolService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,6 +34,12 @@ public class JwtUserDetails implements UserDetailsService {
             return null;
                                                                                                //Kullanıcı var ise kullanıcının detay bilgilerine bakıyoruz.
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();                         //Kullanıcının yetkileri neler?
+        List<Rol> rolListesi = rolService.rolBulKullaniciIdyeGore(kullaniciId);                //Rol servisinden kullaniciId sine ait rollerin listesini çekiyoruz.
+        rolListesi.forEach(r->{
+            grantedAuthorities.add(new SimpleGrantedAuthority(r.getRoller().toString()));      //Gelen rol listesini GrantedAuthority içerisine ekliyoruz.
+        });
+
+
 
         return User.builder()
                 .username(kullanici.get().getEmail())
