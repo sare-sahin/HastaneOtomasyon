@@ -22,5 +22,5 @@ public class Randevu {
     String doktor;
     String randevuGunu;
     String randevuSaati;
-    RandevuDurumu state;
+    RandevuDurumu randevuDurumu;
 }

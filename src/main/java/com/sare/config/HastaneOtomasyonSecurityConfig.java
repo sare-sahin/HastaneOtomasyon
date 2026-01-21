@@ -23,6 +23,8 @@ public class HastaneOtomasyonSecurityConfig {
                 req
                         .requestMatchers("/swagger-ui/**", "v3/api-docs/**", "/dev/v1/kullanici/**")
                         .permitAll()                  //yukarıdaki adreslere izin verir.
+                        .requestMatchers("/dev/v1/rol/**").hasAuthority("MODERATOR")
+                        .requestMatchers("/dev/v1/randevu/**").hasAnyAuthority("MODERATOR","DOKTOR","KULLANICI")
                         .anyRequest().authenticated() //kalan tüm adreslere oturum açma zorunluluğu getirir.
         );
         http.csrf(AbstractHttpConfigurer::disable);   //csrf ile doğrulamayı kapatır.

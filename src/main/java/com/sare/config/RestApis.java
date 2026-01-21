@@ -14,5 +14,5 @@ public class RestApis {
     public static final String LOGIN = "/login";
 
     public static final String ROLEKLE = "/rol-ekle";
-
+    public static final String RANDEVUEKLE = "/randevu-ekle";
 }
