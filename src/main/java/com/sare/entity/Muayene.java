@@ -1,6 +1,5 @@
 package com.sare.entity;
 
-import com.sare.utility.RandevuDurumu;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,17 +12,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "tblrandevu")
-public class Randevu {
+@Table(name = "tblmuayene")
+public class Muayene {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     Long hastaId;
     Long doktorId;
-    Boolean oncelikliMi;
-    String randevuTarihi;
-    String randevuSaati;
-    RandevuDurumu randevuDurumu;
+    Boolean muayeneYapildiMi;
+    String hastalikOykusu;
+    String tani;
+    Long receteNo;
     LocalDateTime createAt;
     LocalDateTime updateAt;
 }
