@@ -1,8 +1,7 @@
 package com.sare.utility;
 
 public enum Roller {
-    MODERATOR,
+    HASTA,
     DOKTOR,
-    KULLANICI,
-    MISAFIR
+    MODERATOR
 }

@@ -27,7 +27,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
      *
      * Header içerisinde yer alan token bilgisi kontrole tabi tutulur.
      *
-     *    * 1. İlgili kullanıcının id si ile doğrulama yapılıp, bir kimlik kartı oluşturulur.
+     *    * 1. İlgili hastanın id si ile doğrulama yapılıp, bir kimlik kartı oluşturulur.
      *    * 2. Spring in oluşan kimlik kartını tanıyacağı bir token oluşturulur. (AuthenticationToken)
      *    * 3. Geçerli oturum içerisine bu token enjekte edilir.                 (Holder içerisine ekleme)
      *
@@ -48,12 +48,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         final String requestHeaderAuthorization = request.getHeader("Authorization");                     // reguest içinden header, header içinden authorization bilgisi alınır.
         if(Objects.nonNull(requestHeaderAuthorization) && requestHeaderAuthorization.startsWith("Bearer ")){ // authorization null olmamalı ve Bearer ile başlamalı.
             String token = requestHeaderAuthorization.substring(7);                                // artık gelen istekteki token bilgisine ulaşıldı.
-            Optional<Long> kullaniciId = jwtManager.validateToken(token);                                    // token bilgisi doğrulanmalı.
-            if(kullaniciId.isPresent()){                                                                     // token geçerli ve bir id var olmalı.
-                UserDetails userDetails = jwtUserDetails.loadUserById(kullaniciId.get());                    //JwtUserDetails sınıfını yazdık ve buraya dahil ettik.
-                UsernamePasswordAuthenticationToken springToken = new                                        //Spring in algıladığı token üretiyoruz.
+            Optional<Long> hastaId = jwtManager.validateToken(token);                                        // token bilgisi doğrulanmalı.
+            if(hastaId.isPresent()){                                                                         // token geçerli ve bir id var olmalı.
+                UserDetails userDetails = jwtUserDetails.loadUserById(hastaId.get());                        // JwtUserDetails sınıfını yazdık ve buraya dahil ettik.
+                UsernamePasswordAuthenticationToken springToken = new                                        // Spring in algıladığı token üretiyoruz.
                         UsernamePasswordAuthenticationToken(userDetails,null, userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(springToken);                           //Geçerli oturumun içine token'ı yerleştiriyoruz.
+                SecurityContextHolder.getContext().setAuthentication(springToken);                           // Geçerli oturumun içine token'ı yerleştiriyoruz.
             }
         }
         filterChain.doFilter(request,response);

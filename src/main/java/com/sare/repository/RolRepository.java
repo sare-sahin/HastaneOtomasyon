@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface RolRepository extends JpaRepository<Rol, Long> {
 
-    List<Rol> findAllRolByKullaniciId(Long kullaniciId);
+    List<Rol> findAllRolByHastaId(Long hastaId);
 }

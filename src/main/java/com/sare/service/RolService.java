@@ -15,14 +15,14 @@ public class RolService {
 
     public void rolEkle(RolEkleRequestDto dto){
         rolRepository.save(Rol.builder()
-                .kullaniciId(dto.kullaniciId())
+                .hastaId(dto.hastaId())
                 .roller(dto.roller())
                 .build());
     }
 
 
-    public List<Rol> rolBulKullaniciIdyeGore(Long kullaniciId) {
-        return rolRepository.findAllRolByKullaniciId(kullaniciId);
+    public List<Rol> rolBulHastaIdyeGore(Long hastaId) {
+        return rolRepository.findAllRolByHastaId(hastaId);
     }
 
 

@@ -19,7 +19,7 @@ public class JwtManager {
     private final Long expirationDate = 1000L * 60 * 60 * 5;
 
 
-    public String createToken(Long kullaniciId) {
+    public String createToken(Long hastaId) {
         String token;
         Long now = System.currentTimeMillis();
         Date issuerAt = new Date(now);
@@ -30,7 +30,7 @@ public class JwtManager {
                 .withIssuer(issuer)
                 .withIssuedAt(issuerAt)
                 .withExpiresAt(expiration)
-                .withClaim("kullaniciId", kullaniciId)
+                .withClaim("hastaId", hastaId)
                 .withClaim("HastaneOtomasyon", "Yeni bir uygulama yazdım.")
                 .withClaim("log", "şuan saat tam olarak " + (new Date()))
                 .sign(algorithm);
@@ -45,8 +45,8 @@ public class JwtManager {
             DecodedJWT decodedJWT = verifier.verify(token);
             if(Objects.isNull(decodedJWT))
                 return Optional.empty();
-            Long kullaniciId = decodedJWT.getClaim("kullaniciId").asLong();
-            return Optional.of(kullaniciId);
+            Long hastaId = decodedJWT.getClaim("hastaId").asLong();
+            return Optional.of(hastaId);
         }catch (Exception exception){
             return Optional.empty();
         }

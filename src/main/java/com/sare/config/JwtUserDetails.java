@@ -1,8 +1,8 @@
 package com.sare.config;
 
-import com.sare.entity.Kullanici;
+import com.sare.entity.Hasta;
 import com.sare.entity.Rol;
-import com.sare.service.KullaniciService;
+import com.sare.service.HastaService;
 import com.sare.service.RolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class JwtUserDetails implements UserDetailsService {
-    private final KullaniciService kullaniciService;
+    private final HastaService hastaService;
     private final RolService rolService;
 
     @Override
@@ -28,13 +28,13 @@ public class JwtUserDetails implements UserDetailsService {
     }
 
 
-    public UserDetails loadUserById(Long kullaniciId) {
-        Optional<Kullanici> kullanici = kullaniciService.kullaniciBulIdyeGore(kullaniciId);    //Bu id ye sahip bir kullanıcı var mı?
-        if(kullanici.isEmpty())                                                                //Kullanıcı yoksa boş dön.
+    public UserDetails loadUserById(Long hastaId) {
+        Optional<Hasta> hasta = hastaService.hastaBulIdyeGore(hastaId);                        //Bu id ye sahip bir hasta var mı?
+        if(hasta.isEmpty())                                                                    //Hasta yoksa boş dön.
             return null;
-                                                                                               //Kullanıcı var ise kullanıcının detay bilgilerine bakıyoruz.
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();                         //Kullanıcının yetkileri neler?
-        List<Rol> rolListesi = rolService.rolBulKullaniciIdyeGore(kullaniciId);                //Rol servisinden kullaniciId sine ait rollerin listesini çekiyoruz.
+                                                                                               //Hasta var ise hastanın detay bilgilerine bakıyoruz.
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();                         //Hastanın yetkileri neler?
+        List<Rol> rolListesi = rolService.rolBulHastaIdyeGore(hastaId);                        //Rol servisinden hastaId sine ait rollerin listesini çekiyoruz.
         rolListesi.forEach(r->{
             grantedAuthorities.add(new SimpleGrantedAuthority(r.getRoller().toString()));      //Gelen rol listesini GrantedAuthority içerisine ekliyoruz.
         });
@@ -42,8 +42,8 @@ public class JwtUserDetails implements UserDetailsService {
 
 
         return User.builder()
-                .username(kullanici.get().getEmail())
-                .password(kullanici.get().getSifre())
+                .username(hasta.get().getEmail())
+                .password(hasta.get().getSifre())
                 .accountLocked(false)                      //Hesap kilitli mi, değil.
                 .accountExpired(false)                     //Hesabın süresi doldu mu, hayır.
                 .authorities(grantedAuthorities)           //Hesabın yetkilerinin listesi nelerdir?

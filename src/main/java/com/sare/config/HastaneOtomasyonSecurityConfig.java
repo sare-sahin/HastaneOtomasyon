@@ -21,10 +21,8 @@ public class HastaneOtomasyonSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(req->
                 req
-                        .requestMatchers("/swagger-ui/**", "v3/api-docs/**", "/dev/v1/kullanici/**")
+                        .requestMatchers("/swagger-ui/**", "v3/api-docs/**", "/dev/v1/hasta/**")
                         .permitAll()                  //yukarıdaki adreslere izin verir.
-                        .requestMatchers("/dev/v1/rol/**").hasAuthority("MODERATOR")
-                        .requestMatchers("/dev/v1/randevu/**").hasAnyAuthority("MODERATOR","DOKTOR","KULLANICI")
                         .anyRequest().authenticated() //kalan tüm adreslere oturum açma zorunluluğu getirir.
         );
         http.csrf(AbstractHttpConfigurer::disable);   //csrf ile doğrulamayı kapatır.
