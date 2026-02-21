@@ -13,7 +13,9 @@ public class RestApis {
     public static final String ROL = BASE_URL + "/rol";
 
     public static final String REGISTER = "/register";
-    public static final String LOGIN = "/login";
-    public static final String ROLEKLE = "/rol-ekle";
+    public static final String DOKTOREKLE = "/doktor-ekle";
     public static final String RANDEVUEKLE = "/randevu-ekle";
+    public static final String ROLEKLE = "/rol-ekle";
+
+    public static final String LOGIN = "/login";
 }
