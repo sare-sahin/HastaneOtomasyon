@@ -1,3 +1,6 @@
+🚀 HASTANE OTOMASYON SİSTEMİ
+
+
 PROJENİN AMACI:
 Bu proje hastanelerdeki randevu, doktor, hasta ve tıbbi kayıt süreçlerini optimize etmek amacıyla geliştirilmiş, güvenlik ve veri tutarlılığını odak noktasına alan full-stack bir web uygulamasıdır.
 
